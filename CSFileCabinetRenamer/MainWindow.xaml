@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CSFileCabinetRenamer"
         mc:Ignorable="d"
         Title="FileCabinet Name Cleaner"
-        Height="400" Width="320">
+        Height="400" Width="330">
     <Grid Margin="2">
         <Grid.Resources>
             <Style TargetType="{x:Type Button}">
