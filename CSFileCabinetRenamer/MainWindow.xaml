@@ -1,0 +1,63 @@
+﻿<Window x:Class="CSFileCabinetRenamer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CSFileCabinetRenamer"
+        mc:Ignorable="d"
+        Title="FileCabinet Name Cleaner"
+        Height="400" Width="320">
+    <Grid Margin="2">
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="0,4,0,4" />
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="0" x:Name="button_open_files" Content="Add Files" Click="button_open_files_Click" Height="30"
+                ToolTip="Select files in a folder to display below." FontSize="14"/>
+        <ListView Name="listview" Grid.Row="1">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Clean?" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding IsCleanName}" Background="{Binding IsCleanBackground}"
+                                           Margin="-6,0,-6,0" FontWeight="Bold" TextAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="File Name">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding FileName}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Ext">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding FileExtension}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+            
+        </ListView>
+        <Button Grid.Row="2" x:Name="button_rename_files" Content="Rename Files" Click="button_rename_files_Click" Height="30"
+                ToolTip="Rename the dirty files." FontSize="14"/>
+        <TextBlock Grid.Row="3"  Text="Version 1.0" HorizontalAlignment="Center" FontSize="10"/>
+    </Grid>
+</Window>
