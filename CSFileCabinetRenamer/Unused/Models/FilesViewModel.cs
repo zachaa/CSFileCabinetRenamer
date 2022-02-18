@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 
-// Does not do what I want ?
+/*// Does not do what I want ?
 namespace CSFileCabinetRenamer.Models
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
@@ -76,4 +76,4 @@ namespace CSFileCabinetRenamer.Models
         }
 
     }
-}
+}*/
