@@ -49,7 +49,10 @@
                     <GridViewColumn Header="Extension">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding FileExtension}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding FileExtension}" Margin="0, 0, 0, 2"/>
+                                    <Image Source="{Binding FileExtImage}" Height="16"/>
+                                </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -67,6 +70,6 @@
         </ListView>
         <Button Grid.Row="2" x:Name="button_rename_files" Content="Rename Files" Click="button_rename_files_Click" Height="30"
                 ToolTip="Rename the dirty files." FontSize="14"/>
-        <TextBlock Grid.Row="3"  Text="Version 1.0" HorizontalAlignment="Center" FontSize="10"/>
+        <TextBlock Grid.Row="3"  Text="Version 1.1" HorizontalAlignment="Center" FontSize="10"/>
     </Grid>
 </Window>

@@ -1,10 +1,9 @@
 ﻿using System.IO;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Documents;
 using CSFileCabinetRenamer.TextInfo;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace CSFileCabinetRenamer
 {
@@ -12,13 +11,15 @@ namespace CSFileCabinetRenamer
     {
         public string FileName { get; }
         public string FileExtension { get; }
+        public ImageSource? FileExtImage { get; }
         public string FilePath { get; }
 
         public bool IsCleanName { get; }
         public Brush BackgroundBrush { get; set; }
         /// <summary> Highlighted Text to put in the GridView </summary>
-        // public FlowDocument FileNameFlowDocument { get; set; }
+        //public FlowDocument FileNameFlowDocument { get; set; }
         public List<Inline> FileNameInlineList { get; set; }
+
 
         private TextElementsHolder textElementsHolder {get;}
         private bool _HasCombiningChar { get; set; }
@@ -32,14 +33,15 @@ namespace CSFileCabinetRenamer
         static readonly LinearGradientBrush _brushUnknown = new(Color.FromArgb(255, 100, 100, 100), Color.FromArgb(40, 100, 100, 100), 0.0);
 
         // Brushes for coloring parts of text to show problems
-        static SolidColorBrush _bCombineChar = new(Color.FromArgb(150, 220, 180, 10));
-        static SolidColorBrush _bExtendedUni = new(Color.FromArgb(150, 220, 40, 40));
-        static SolidColorBrush _bBeyondUni = new(Color.FromArgb(150, 180, 40, 220));
+        static readonly SolidColorBrush _bCombineChar = new(Color.FromArgb(150, 220, 180, 10));
+        static readonly SolidColorBrush _bExtendedUni = new(Color.FromArgb(150, 220, 40, 40));
+        static readonly SolidColorBrush _bBeyondUni = new(Color.FromArgb(150, 180, 40, 220));
 
         public File(string file_path)
         {
             FileName = Path.GetFileNameWithoutExtension(file_path);
             FileExtension = Path.GetExtension(file_path);
+            FileExtImage = ToImageSource(System.Drawing.Icon.ExtractAssociatedIcon(file_path));
             FilePath = file_path;
 
             textElementsHolder = new TextElementsHolder(FileName);
@@ -59,8 +61,8 @@ namespace CSFileCabinetRenamer
             var doc = new FlowDocument();
 
             // Most file name should end be here
-            if (IsCleanName) 
-            { 
+            if (IsCleanName)
+            {
                 doc.Blocks.Add(new Paragraph(new Run(FileName)));
                 return doc;
             }
@@ -74,7 +76,7 @@ namespace CSFileCabinetRenamer
                 if (tel.HasBeyondUnicode) { r.Background = _bBeyondUni; }
                 else if (tel.HasExtendedUnicode) { r.Background = _bExtendedUni; }
                 else if (tel.HasCombiningChar) { r.Background = _bCombineChar; }
-                
+
                 // Add the element to the run to reform the full file name
                 paragraph.Inlines.Add(r);
             }
@@ -130,6 +132,22 @@ namespace CSFileCabinetRenamer
                     System.IO.File.Move(FilePath, new_path);
                 }
             }
+        }
+
+        /// <summary>
+        /// Used to convert an icon from windows to a aceptable image source for WPF 'Image'.
+        /// </summary>
+        public static ImageSource? ToImageSource(System.Drawing.Icon? icon)
+        {
+            // catch null errors
+            if (icon == null) { return null; }
+
+            ImageSource imageSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(
+                icon.Handle,
+                Int32Rect.Empty,
+                System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
+
+            return imageSource;
         }
 
         public override string ToString()
