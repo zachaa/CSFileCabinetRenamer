@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="FileCabinet Name Cleaner"
         Height="400" Width="330">
+    <!-- xmlns:local="clr-namespace:CSFileCabinetRenamer"-->
     <Grid Margin="2">
         <Grid.Resources>
             <Style TargetType="{x:Type Button}">
@@ -33,7 +34,7 @@
                     <GridViewColumn Header="Clean?" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding IsCleanName}" Background="{Binding IsCleanBackground}"
+                                <TextBlock Text="{Binding IsCleanName}" Background="{Binding BackgroundBrush}"
                                            Margin="-6,0,-6,0" FontWeight="Bold" TextAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -45,10 +46,18 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Ext">
+                    <GridViewColumn Header="Extension">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding FileExtension}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- Highlighted characters -->
+                    <GridViewColumn Header="Errors">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <local:BindableTextBlock InlineList="{Binding FileNameInlineList}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
