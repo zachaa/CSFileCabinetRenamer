@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CSFileCabinetRenamer"
         mc:Ignorable="d"
         Title="FileCabinet Name Cleaner"
-        Height="400" Width="330">
+        Height="400" Width="450">
     <!-- xmlns:local="clr-namespace:CSFileCabinetRenamer"-->
     <Grid Margin="2">
         <Grid.Resources>
@@ -16,6 +16,7 @@
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -23,7 +24,80 @@
 
         <Button Grid.Row="0" x:Name="button_open_files" Content="Add Files" Click="button_open_files_Click" Height="30"
                 ToolTip="Select files in a folder to display below." FontSize="14"/>
-        <ListView Name="listview" Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0, 0, 0, 4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="4,0,6,0">
+                <TextBlock Text="Clean:" VerticalAlignment="Center" Margin="2,0,2,0"/>
+                <Rectangle Height="20" Stroke="Black" Width="20" Margin="2,0,2,0" VerticalAlignment="Center"
+                           ToolTip="File is acceptable for FileCabinet CS.">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                    <RotateTransform Angle="-90" CenterX="0.5" CenterY="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FF32F050"/>
+                            <GradientStop Color="#6632F050" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Text="Auto-Fix:" VerticalAlignment="Center" Margin="2,0,2,0"/>
+                <Rectangle Height="20" Stroke="Black" Width="20" Margin="2,0,2,0" VerticalAlignment="Center"
+                           ToolTip="Can be automatically fixed.">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                    <RotateTransform Angle="-90" CenterX="0.5" CenterY="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FFFAB40A"/>
+                            <GradientStop Color="#66FAB40A" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Text="Manual Fix:" VerticalAlignment="Center" Margin="2,0,2,0"/>
+                <Rectangle Height="20" Stroke="Black" Width="20" Margin="2,0,2,0" VerticalAlignment="Center"
+                           ToolTip="Requires manual fixing.">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                    <RotateTransform Angle="-90" CenterX="0.5" CenterY="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FFF03232"/>
+                            <GradientStop Color="#66F03232" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="6,0,4,0">
+                <TextBlock Text="Errors:" VerticalAlignment="Center"/>
+                <Rectangle Height="20" Stroke="Black" Width="20" Margin="4,0,4,0" VerticalAlignment="Center"
+                           ToolTip="Combining Characters" Fill="#96F0C70A"/>
+                <Rectangle Height="20" Stroke="Black" Width="20" Margin="4,0,4,0" VerticalAlignment="Center"
+                           ToolTip="Extended Unicode in BMP" Fill="#96DC2828"/>
+                <Rectangle Height="20" Stroke="Black" Width="20" Margin="4,0,4,0" VerticalAlignment="Center"
+                           ToolTip="Extended Unicode in SMP" Fill="#96B428DC"/>
+            </StackPanel>
+        </Grid>
+        <ListView Name="listview" Grid.Row="2">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -66,10 +140,10 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
-            
+
         </ListView>
-        <Button Grid.Row="2" x:Name="button_rename_files" Content="Rename Files" Click="button_rename_files_Click" Height="30"
+        <Button Grid.Row="3" x:Name="button_rename_files" Content="Rename Files" Click="button_rename_files_Click" Height="30"
                 ToolTip="Rename the dirty files." FontSize="14"/>
-        <TextBlock Grid.Row="3"  Text="Version 1.1" HorizontalAlignment="Center" FontSize="10"/>
+        <TextBlock Grid.Row="4"  Text="Version 1.1" HorizontalAlignment="Center" FontSize="10"/>
     </Grid>
 </Window>

@@ -1,9 +1,9 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Documents;
 using CSFileCabinetRenamer.TextInfo;
-using System.Collections.Generic;
-using System.Windows;
 
 namespace CSFileCabinetRenamer
 {
@@ -27,15 +27,15 @@ namespace CSFileCabinetRenamer
         private bool _HasBeyondUnicode { get; set; }
 
         // Brushes for IsClean Column
-        static readonly LinearGradientBrush _brushGood = new(Color.FromArgb(255, 50, 240, 80), Color.FromArgb(40, 50, 240, 80), 0.0);
-        static readonly LinearGradientBrush _brushFix = new(Color.FromArgb(255, 250, 180, 10), Color.FromArgb(40, 250, 180, 10), 0.0);
-        static readonly LinearGradientBrush _brushBad = new(Color.FromArgb(255, 240, 50, 50), Color.FromArgb(40, 240, 50, 50), 0.0);
-        static readonly LinearGradientBrush _brushUnknown = new(Color.FromArgb(255, 100, 100, 100), Color.FromArgb(40, 100, 100, 100), 0.0);
+        public readonly LinearGradientBrush _brushGood = new(Color.FromArgb(255, 50, 240, 80), Color.FromArgb(40, 50, 240, 80), 0.0);
+        public readonly LinearGradientBrush _brushFix = new(Color.FromArgb(255, 250, 180, 10), Color.FromArgb(40, 250, 180, 10), 0.0);
+        public readonly LinearGradientBrush _brushBad = new(Color.FromArgb(255, 240, 50, 50), Color.FromArgb(40, 240, 50, 50), 0.0);
+        public readonly LinearGradientBrush _brushUnknown = new(Color.FromArgb(255, 100, 100, 100), Color.FromArgb(40, 100, 100, 100), 0.0);
 
         // Brushes for coloring parts of text to show problems
-        static readonly SolidColorBrush _bCombineChar = new(Color.FromArgb(150, 220, 180, 10));
-        static readonly SolidColorBrush _bExtendedUni = new(Color.FromArgb(150, 220, 40, 40));
-        static readonly SolidColorBrush _bBeyondUni = new(Color.FromArgb(150, 180, 40, 220));
+        public readonly SolidColorBrush _bCombineChar = new(Color.FromArgb(150, 240, 200, 10));
+        public readonly SolidColorBrush _bExtendedUni = new(Color.FromArgb(150, 220, 40, 40));
+        public readonly SolidColorBrush _bBeyondUni = new(Color.FromArgb(150, 180, 40, 220));
 
         public File(string file_path)
         {
