@@ -21,7 +21,10 @@ namespace CSFileCabinetRenamer
         {
             // This class holds the methods and settings to share with all files that will be renamed
             // It must be passed to each File item
-            var File_Renamer = new FileRenamer();
+            var File_Renamer = new FileRenamer(checkBox_removeCombine.IsChecked ?? false,
+                checkBox_removeExtended.IsChecked ?? false,
+                checkBox_removeBeyond.IsChecked ?? false,
+                checkBox_convertChar.IsChecked ?? false);
 
             foreach (File file_item in filesInFolder)
             {
