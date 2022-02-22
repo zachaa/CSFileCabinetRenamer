@@ -19,11 +19,15 @@ namespace CSFileCabinetRenamer
 
         private void button_rename_files_Click(object sender, RoutedEventArgs e)
         {
+            // This class holds the methods and settings to share with all files that will be renamed
+            // It must be passed to each File item
+            var File_Renamer = new FileRenamer();
+
             foreach (File file_item in filesInFolder)
             {
                 try
                 {
-                    file_item.ChangeFileName();
+                    file_item.ChangeFileName(File_Renamer);
                 }
                 catch (System.IO.IOException)
                 {
@@ -51,6 +55,5 @@ namespace CSFileCabinetRenamer
                 }  
             }
         }
-
     }
 }

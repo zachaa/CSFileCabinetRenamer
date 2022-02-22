@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Documents;
 using CSFileCabinetRenamer.TextInfo;
+//using System.Diagnostics;
 
 namespace CSFileCabinetRenamer
 {
@@ -16,13 +17,14 @@ namespace CSFileCabinetRenamer
 
         public bool IsCleanName { get; }
         public Brush BackgroundBrush { get; set; }
+
         /// <summary> Highlighted Text to put in the GridView </summary>
-        //public FlowDocument FileNameFlowDocument { get; set; }
         public List<Inline> FileNameInlineList { get; set; }
 
 
-        private TextElementsHolder textElementsHolder {get;}
+        private TextElementsHolder textElementsHolder { get; }
         private bool _HasCombiningChar { get; set; }
+        private bool _HasConvertableChar { get; set; }
         private bool _HasExtendedUnicode { get; set; }
         private bool _HasBeyondUnicode { get; set; }
 
@@ -33,6 +35,7 @@ namespace CSFileCabinetRenamer
         public readonly LinearGradientBrush _brushUnknown = new(Color.FromArgb(255, 100, 100, 100), Color.FromArgb(40, 100, 100, 100), 0.0);
 
         // Brushes for coloring parts of text to show problems
+        public readonly SolidColorBrush _bConvertChar = new(Color.FromArgb(150, 50, 200, 230));
         public readonly SolidColorBrush _bCombineChar = new(Color.FromArgb(150, 240, 200, 10));
         public readonly SolidColorBrush _bExtendedUni = new(Color.FromArgb(150, 220, 40, 40));
         public readonly SolidColorBrush _bBeyondUni = new(Color.FromArgb(150, 180, 40, 220));
@@ -46,43 +49,14 @@ namespace CSFileCabinetRenamer
 
             textElementsHolder = new TextElementsHolder(FileName);
             _HasCombiningChar = textElementsHolder.HasCombiningCharacters;
+            _HasConvertableChar = textElementsHolder.HasConvertableCharacters;
             _HasExtendedUnicode = textElementsHolder.HasExtendedUnicode;
             _HasBeyondUnicode = textElementsHolder.HasBeyondUnicode;
             IsCleanName = textElementsHolder.IsClean();
 
             BackgroundBrush = BackgroundBrushFromContent();
-            // FileNameFlowDocument = CreateFlowDoc();
             FileNameInlineList = CreateInlineList();
-
         }
-
-        /*private FlowDocument CreateFlowDoc()
-        {
-            var doc = new FlowDocument();
-
-            // Most file name should end be here
-            if (IsCleanName)
-            {
-                doc.Blocks.Add(new Paragraph(new Run(FileName)));
-                return doc;
-            }
-
-            var paragraph = new Paragraph();
-            foreach ((int index, TextInfo.TextElement tel) in textElementsHolder.TextElements)
-            {
-                var r = new Run(tel.ToString());
-
-                // Color the background depending on the type of TextElement
-                if (tel.HasBeyondUnicode) { r.Background = _bBeyondUni; }
-                else if (tel.HasExtendedUnicode) { r.Background = _bExtendedUni; }
-                else if (tel.HasCombiningChar) { r.Background = _bCombineChar; }
-
-                // Add the element to the run to reform the full file name
-                paragraph.Inlines.Add(r);
-            }
-            doc.Blocks.Add(paragraph);
-            return doc;
-        }*/
 
         private List<Inline> CreateInlineList()
         {
@@ -98,9 +72,9 @@ namespace CSFileCabinetRenamer
             foreach ((int index, TextInfo.TextElement tel) in textElementsHolder.TextElements)
             {
                 var r = new Run(tel.ToString());
-
                 // Color the background depending on the type of TextElement
                 if (tel.HasBeyondUnicode) { r.Background = _bBeyondUni; }
+                else if (tel.HasConvertableChar) { r.Background = _bConvertChar; }
                 else if (tel.HasExtendedUnicode) { r.Background = _bExtendedUni; }
                 else if (tel.HasCombiningChar) { r.Background = _bCombineChar; }
 
@@ -115,22 +89,30 @@ namespace CSFileCabinetRenamer
             // Color the IsClean background depending on if it can be fixed or not
             if (IsCleanName) { return _brushGood; }
             else if (_HasExtendedUnicode || _HasBeyondUnicode) { return _brushBad; }
-            else if (_HasCombiningChar) { return _brushFix; }
+            else if (_HasCombiningChar || _HasConvertableChar) { return _brushFix; }
             else { return _brushUnknown; }
         }
 
-        public void ChangeFileName()
+        public void ChangeFileName(FileRenamer renamer)
         {
             // Can't change Extended or Beyond Unicode files, user will have to do that manually
-            if (!IsCleanName && !_HasBeyondUnicode && !_HasExtendedUnicode)
+            //if (!IsCleanName && !_HasBeyondUnicode && !_HasExtendedUnicode)
+            //{
+            //    if (System.IO.File.Exists(FilePath))
+            //    {
+            //        string new_name = TextConveter.RemoveCombiningCharacters(FileName);
+            //        //string new_name_convert = TextConverter.ConvertCharacters(FileName);
+            //        string new_path = (Path.GetDirectoryName(FilePath) + Path.DirectorySeparatorChar + new_name + FileExtension);
+            //        //Trace.WriteLine(new_path);
+            //        System.IO.File.Move(FilePath, new_path);
+            //    }
+            //}
+
+            if (!IsCleanName)
             {
-                if (System.IO.File.Exists(FilePath))
-                {
-                    string new_name = TextConveter.RemoveCombiningCharacters(FileName);
-                    string new_path = (Path.GetDirectoryName(FilePath) + Path.DirectorySeparatorChar + new_name + FileExtension);
-                    //Trace.WriteLine(new_path);
-                    System.IO.File.Move(FilePath, new_path);
-                }
+                string new_name = renamer.RenameFromTextElements(textElementsHolder.TextElements);
+                string new_path = (Path.GetDirectoryName(FilePath) + Path.DirectorySeparatorChar + new_name + FileExtension);
+                System.IO.File.Move(FilePath, new_path);
             }
         }
 

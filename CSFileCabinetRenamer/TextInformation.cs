@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using CSFileCabinetRenamer.Language;
 
 
 namespace CSFileCabinetRenamer.TextInfo
@@ -17,6 +18,7 @@ namespace CSFileCabinetRenamer.TextInfo
         public List<int> CodePoints { get; }
         public string U32Code { get; }
         public bool HasCombiningChar { get; }
+        public bool HasConvertableChar { get; }
         public bool HasExtendedUnicode { get; }
         public bool HasBeyondUnicode { get; }
 
@@ -26,6 +28,7 @@ namespace CSFileCabinetRenamer.TextInfo
             CodePoints = ToCodePoints(_Element);
             U32Code = _ToHexCode();
             HasCombiningChar = _HasCombiningCharacters(_Element);
+            HasConvertableChar = _HasConvertableCharacters(_Element);
             HasExtendedUnicode = _HasExtendedUnicodeChars(_Element);
             HasBeyondUnicode = _HasBeyondUnicodeChars();
         }
@@ -41,6 +44,13 @@ namespace CSFileCabinetRenamer.TextInfo
             // Could probably do this with CodePoints.Count > 1 as there should only be 1 element in this class
             MatchCollection combiningChars = regexCombineChars.Matches(text);
             if (combiningChars.Count > 0) { return true; }
+            return false;
+        }
+
+        private bool _HasConvertableCharacters(string text)
+        {
+            MatchCollection convertableChars = LanguageDictionary.MappingRegex.Matches(text);
+            if (convertableChars.Count > 0) { return true; }
             return false;
         }
 
@@ -63,6 +73,12 @@ namespace CSFileCabinetRenamer.TextInfo
         public override string ToString()
         {
             return _Element.ToString();
+        }
+
+        /// <summary>Gives the element string, hex code, and bools about the element</summary>
+        public string ToDetailedString()
+        {
+            return $"{_Element}: {U32Code}\t\t CC:{HasCombiningChar} ConvC:{HasConvertableChar}\t EU:{HasExtendedUnicode} BU:{HasBeyondUnicode}";
         }
 
         /// <summary>
@@ -116,6 +132,7 @@ namespace CSFileCabinetRenamer.TextInfo
         public string BaseText { get; }
         public List<(int, TextElement)> TextElements { get; }
         public bool HasCombiningCharacters { get; }
+        public bool HasConvertableCharacters { get; }
         public bool HasExtendedUnicode { get; }
         public bool HasBeyondUnicode { get; }
 
@@ -124,6 +141,7 @@ namespace CSFileCabinetRenamer.TextInfo
             BaseText = text;
             TextElements = new List<(int, TextElement)>();
             HasCombiningCharacters = false;
+            HasConvertableCharacters = false;
             HasExtendedUnicode = false;
             HasBeyondUnicode = false;
 
@@ -135,6 +153,7 @@ namespace CSFileCabinetRenamer.TextInfo
                 var tel = new TextElement(enumerator.GetTextElement());
                 // set the bools to true if any text element fits
                 if (tel.HasCombiningChar) { HasCombiningCharacters = true; }
+                if (tel.HasConvertableChar) { HasConvertableCharacters = true; }
                 if (tel.HasExtendedUnicode) { HasExtendedUnicode = true; }
                 if (tel.HasBeyondUnicode) { HasBeyondUnicode = true; }
                 TextElements.Add((index, tel));
@@ -148,7 +167,7 @@ namespace CSFileCabinetRenamer.TextInfo
 
         public override string ToString()
         {
-            return $"{BaseText}: CC:{HasCombiningCharacters}, EU:{HasExtendedUnicode}, BU:{HasBeyondUnicode}";
+            return $"{BaseText}: CC:{HasCombiningCharacters}, ConvC:{HasConvertableCharacters}, EU:{HasExtendedUnicode}, BU:{HasBeyondUnicode}";
         }
     }
 }
