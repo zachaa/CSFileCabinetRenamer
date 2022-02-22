@@ -94,7 +94,7 @@
                 <Rectangle Height="20" Stroke="Black" Width="20" Margin="4,0,4,0" VerticalAlignment="Center"
                            ToolTip="Convertable Characters (Convert to valid letter)" Fill="#9632C8E6"/>
                 <Rectangle Height="20" Stroke="Black" Width="20" Margin="4,0,4,0" VerticalAlignment="Center"
-                           ToolTip="Combining Characters (Auto Remove)" Fill="#96F0C70A"/>
+                           ToolTip="Combining Characters (Auto Remove)" Fill="#96F0C80A"/>
                 <Rectangle Height="20" Stroke="Black" Width="20" Margin="4,0,4,0" VerticalAlignment="Center"
                            ToolTip="Extended Unicode in Basic Multilingual Plane" Fill="#96DC2828"/>
                 <Rectangle Height="20" Stroke="Black" Width="20" Margin="4,0,4,0" VerticalAlignment="Center"
@@ -107,9 +107,10 @@
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 </Style>
             </ListView.ItemContainerStyle>
+            
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Clean?" Width="80">
+                    <GridViewColumn Header="Clean?" Width="70">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding IsCleanName}" Background="{Binding BackgroundBrush}"
@@ -144,13 +145,12 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
-
         </ListView>
-        <WrapPanel Grid.Row="3" Orientation="Horizontal" Margin="6,0,6,0">
-            <CheckBox x:Name="checkBox_removeCombine" Content="Remove Combining Characters" Margin="0,0,8,4"/>
-            <CheckBox x:Name="checkBox_convertChar" Content="Convert Characters" Margin="0,0,8,4"/>
-            <CheckBox x:Name="checkBox_removeExtended" Content="Remove Extended Unicode" Margin="0,0,8,4"/>
-            <CheckBox x:Name="checkBox_removeBeyond" Content="Remove Supplemental Unicode" Margin="0,0,0,4"/>
+        <WrapPanel Grid.Row="3" Orientation="Horizontal" Margin="6,4,6,0">
+            <CheckBox x:Name="checkBox_removeCombine" Content="Remove Combining Characters" Margin="0,0,8,4" Background="#96F0C80A" IsChecked="True"/>
+            <CheckBox x:Name="checkBox_convertChar" Content="Convert Characters" Margin="0,0,8,4" Background="#9632C8E6" IsChecked="True"/>
+            <CheckBox x:Name="checkBox_removeExtended" Content="Remove Extended Unicode" Margin="0,0,8,4" Background="#96DC2828"/>
+            <CheckBox x:Name="checkBox_removeBeyond" Content="Remove Supplemental Unicode" Margin="0,0,0,4" Background="#96B428DC"/>
         </WrapPanel>
         <Button Grid.Row="4" x:Name="button_rename_files" Content="Rename Files" Click="button_rename_files_Click" Height="30"
                 ToolTip="Rename the dirty files." FontSize="14"/>
