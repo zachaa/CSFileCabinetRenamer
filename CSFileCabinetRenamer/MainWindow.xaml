@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:CSFileCabinetRenamer"
         mc:Ignorable="d"
         Title="FileCabinet Name Cleaner"
-        Height="400" Width="450">
+        Height="430" Width="470"
+        MinHeight="300" MinWidth="400">
     <!-- xmlns:local="clr-namespace:CSFileCabinetRenamer"-->
     <Grid Margin="2">
         <Grid.Resources>
@@ -18,6 +19,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -90,11 +92,13 @@
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="6,0,4,0">
                 <TextBlock Text="Errors:" VerticalAlignment="Center"/>
                 <Rectangle Height="20" Stroke="Black" Width="20" Margin="4,0,4,0" VerticalAlignment="Center"
-                           ToolTip="Combining Characters" Fill="#96F0C70A"/>
+                           ToolTip="Convertable Characters (Convert to valid letter)" Fill="#9632C8E6"/>
                 <Rectangle Height="20" Stroke="Black" Width="20" Margin="4,0,4,0" VerticalAlignment="Center"
-                           ToolTip="Extended Unicode in BMP" Fill="#96DC2828"/>
+                           ToolTip="Combining Characters (Auto Remove)" Fill="#96F0C70A"/>
                 <Rectangle Height="20" Stroke="Black" Width="20" Margin="4,0,4,0" VerticalAlignment="Center"
-                           ToolTip="Extended Unicode in SMP" Fill="#96B428DC"/>
+                           ToolTip="Extended Unicode in Basic Multilingual Plane" Fill="#96DC2828"/>
+                <Rectangle Height="20" Stroke="Black" Width="20" Margin="4,0,4,0" VerticalAlignment="Center"
+                           ToolTip="Extended Unicode in Supplemental Multilingual Plane" Fill="#96B428DC"/>
             </StackPanel>
         </Grid>
         <ListView Name="listview" Grid.Row="2">
@@ -142,8 +146,14 @@
             </ListView.View>
 
         </ListView>
-        <Button Grid.Row="3" x:Name="button_rename_files" Content="Rename Files" Click="button_rename_files_Click" Height="30"
+        <WrapPanel Grid.Row="3" Orientation="Horizontal" Margin="6,0,6,0">
+            <CheckBox x:Name="checkBox_removeCombine" Content="Remove Combining Characters" Margin="0,0,8,4"/>
+            <CheckBox x:Name="checkBox_convertChar" Content="Convert Characters" Margin="0,0,8,4"/>
+            <CheckBox x:Name="checkBox_removeExtended" Content="Remove Extended Unicode" Margin="0,0,8,4"/>
+            <CheckBox x:Name="checkBox_removeBeyond" Content="Remove Supplemental Unicode" Margin="0,0,0,4"/>
+        </WrapPanel>
+        <Button Grid.Row="4" x:Name="button_rename_files" Content="Rename Files" Click="button_rename_files_Click" Height="30"
                 ToolTip="Rename the dirty files." FontSize="14"/>
-        <TextBlock Grid.Row="4"  Text="Version 1.1" HorizontalAlignment="Center" FontSize="10"/>
+        <TextBlock Grid.Row="5"  Text="Version 1.2" HorizontalAlignment="Center" FontSize="10"/>
     </Grid>
 </Window>
