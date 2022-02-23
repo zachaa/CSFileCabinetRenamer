@@ -35,7 +35,8 @@ namespace CSFileCabinetRenamer
         public readonly LinearGradientBrush _brushUnknown = new(Color.FromArgb(255, 100, 100, 100), Color.FromArgb(40, 100, 100, 100), 0.0);
 
         // Brushes for coloring parts of text to show problems
-        public readonly SolidColorBrush _bConvertChar = new(Color.FromArgb(150, 50, 200, 230));
+        // Convertable Characters are always extended unicode characters and can be removed instead of converted
+        public readonly LinearGradientBrush _bConvertChar;
         public readonly SolidColorBrush _bCombineChar = new(Color.FromArgb(150, 240, 200, 10));
         public readonly SolidColorBrush _bExtendedUni = new(Color.FromArgb(150, 220, 40, 40));
         public readonly SolidColorBrush _bBeyondUni = new(Color.FromArgb(150, 180, 40, 220));
@@ -46,6 +47,12 @@ namespace CSFileCabinetRenamer
             FileExtension = Path.GetExtension(file_path);
             FileExtImage = ToImageSource(System.Drawing.Icon.ExtractAssociatedIcon(file_path));
             FilePath = file_path;
+
+            GradientStopCollection gc = new();
+            gc.Add(new GradientStop(Color.FromArgb(120, 50, 200, 230), 0.0));
+            gc.Add(new GradientStop(Color.FromArgb(120, 50, 200, 230), 0.5));
+            gc.Add(new GradientStop(Color.FromArgb(120, 220, 40, 40), 0.8));
+            _bConvertChar = new LinearGradientBrush(gc, 90.0);
 
             textElementsHolder = new TextElementsHolder(FileName);
             _HasCombiningChar = textElementsHolder.HasCombiningCharacters;
@@ -95,24 +102,14 @@ namespace CSFileCabinetRenamer
 
         public void ChangeFileName(FileRenamer renamer)
         {
-            // Can't change Extended or Beyond Unicode files, user will have to do that manually
-            //if (!IsCleanName && !_HasBeyondUnicode && !_HasExtendedUnicode)
-            //{
-            //    if (System.IO.File.Exists(FilePath))
-            //    {
-            //        string new_name = TextConveter.RemoveCombiningCharacters(FileName);
-            //        //string new_name_convert = TextConverter.ConvertCharacters(FileName);
-            //        string new_path = (Path.GetDirectoryName(FilePath) + Path.DirectorySeparatorChar + new_name + FileExtension);
-            //        //Trace.WriteLine(new_path);
-            //        System.IO.File.Move(FilePath, new_path);
-            //    }
-            //}
-
             if (!IsCleanName)
             {
-                string new_name = renamer.RenameFromTextElements(textElementsHolder.TextElements);
-                string new_path = (Path.GetDirectoryName(FilePath) + Path.DirectorySeparatorChar + new_name + FileExtension);
-                System.IO.File.Move(FilePath, new_path);
+                if (System.IO.File.Exists(FilePath))
+                {
+                    string new_name = renamer.RenameFromTextElements(textElementsHolder.TextElements);
+                    string new_path = (Path.GetDirectoryName(FilePath) + Path.DirectorySeparatorChar + new_name + FileExtension);
+                    System.IO.File.Move(FilePath, new_path);
+                }
             }
         }
 
