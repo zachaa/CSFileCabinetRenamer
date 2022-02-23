@@ -139,7 +139,8 @@
                     <GridViewColumn Header="Errors">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <local:BindableTextBlock InlineList="{Binding FileNameInlineList}"/>
+                                <!-- Use monospace for detailed file name -->
+                                <local:BindableTextBlock InlineList="{Binding FileNameInlineList}" FontFamily="Courier New"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
