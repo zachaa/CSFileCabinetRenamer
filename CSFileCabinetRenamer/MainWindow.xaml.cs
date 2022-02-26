@@ -58,5 +58,11 @@ namespace CSFileCabinetRenamer
                 }  
             }
         }
+
+        private void button_open_help_Click(object sender, RoutedEventArgs e)
+        {
+            var helpWindow = new WindowHelp();
+            helpWindow.ShowDialog();
+        }
     }
 }
