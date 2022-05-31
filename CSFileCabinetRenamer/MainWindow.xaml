@@ -111,6 +111,7 @@
                            ToolTip="Extended Unicode in Supplemental Multilingual Plane" Fill="#96B428DC"/>
             </StackPanel>
         </Grid>
+        <!--Main List View for showing files and their properties-->
         <ListView Name="listview" Grid.Row="2">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
