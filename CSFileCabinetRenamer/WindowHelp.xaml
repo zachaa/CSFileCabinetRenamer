@@ -9,147 +9,280 @@
         MinHeight="400"
         MinWidth="400"
         ShowInTaskbar="False">
-    <Grid> <!--Outer container for scroller and OK button-->
+    <Grid>
+        <!--Outer container for tab control and OK button-->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
-        
-        <ScrollViewer Grid.Row="0">
-            <StackPanel Orientation="Vertical" Margin="2,2,2,2">
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Margin" Value="0,2,0,2"/>
-                    </Style>
-                </StackPanel.Resources>
-
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="1. Click the &quot;Add Files&quot; button at the top."/>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="2. Navigate to the folder where your files are located. Select the files you wish to check and possible rename."/>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="3. The files will load in the the window."/>
+        <TabControl Grid.Row="0">
+            <TabItem Header="Help" Width="80">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+                    <!--Container for scroller-->
+                    <ScrollViewer>
+                        <StackPanel Orientation="Vertical" Margin="2,2,2,2">
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="0,2,0,2"/>
+                                </Style>
+                            </StackPanel.Resources>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0" Margin="4" Text="True" FontWeight="Bold" HorizontalAlignment="Stretch">
-                        <TextBlock.Background>
-                            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
-                                <GradientStop Color="#FF32F050"/>
-                                <GradientStop Color="#2832F050" Offset="1"/>
-                            </LinearGradientBrush>
-                        </TextBlock.Background>
-                    </TextBlock>
-                    <TextBlock Grid.Row="0" Grid.Column="1" Margin="4" TextWrapping="Wrap"
-                               Text="The Document Name is Valid" HorizontalAlignment="Left"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Margin="4" Text="False" FontWeight="Bold" HorizontalAlignment="Stretch">
-                        <TextBlock.Background>
-                            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
-                                <GradientStop Color="#FFFAB40A"/>
-                                <GradientStop Color="#28FAB40A" Offset="1"/>
-                            </LinearGradientBrush>
-                        </TextBlock.Background>
-                    </TextBlock>
-                    <TextBlock Grid.Row="1" Grid.Column="1" Margin="4" TextWrapping="Wrap"
-                               Text="The Document Name is Invalid and can be fixed by replacing characters" HorizontalAlignment="Left"/>
-                    <TextBlock Grid.Row="2" Grid.Column="0" Margin="4" Text="False" FontWeight="Bold" HorizontalAlignment="Stretch">
-                        <TextBlock.Background>
-                            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
-                                <GradientStop Color="#FFF03232"/>
-                                <GradientStop Color="#28F03232" Offset="1"/>
-                            </LinearGradientBrush>
-                        </TextBlock.Background>
-                    </TextBlock>
-                    <TextBlock Grid.Row="2" Grid.Column="1" Margin="4" TextWrapping="Wrap" 
-                               Text="The Document Name is Invalid and can be fixed by deleting characters" HorizontalAlignment="Left"/>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="1. Click the &quot;Add Files&quot; button at the top."/>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="2. Navigate to the folder where your files are located. Select the files you wish to check and possible rename."/>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="3. The files will load in the the window."/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Margin="4" Text="True" FontWeight="Bold" HorizontalAlignment="Stretch">
+                                    <TextBlock.Background>
+                                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                                            <GradientStop Color="#FF32F050"/>
+                                            <GradientStop Color="#2832F050" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </TextBlock.Background>
+                                </TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Margin="4" TextWrapping="Wrap"
+                                       Text="The Document Name is Valid" HorizontalAlignment="Left"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Margin="4" Text="False" FontWeight="Bold" HorizontalAlignment="Stretch">
+                                    <TextBlock.Background>
+                                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                                            <GradientStop Color="#FFFAB40A"/>
+                                            <GradientStop Color="#28FAB40A" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </TextBlock.Background>
+                                </TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Margin="4" TextWrapping="Wrap"
+                                       Text="The Document Name is Invalid and can be fixed by replacing characters" HorizontalAlignment="Left"/>
+                                <TextBlock Grid.Row="2" Grid.Column="0" Margin="4" Text="False" FontWeight="Bold" HorizontalAlignment="Stretch">
+                                    <TextBlock.Background>
+                                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                                            <GradientStop Color="#FFF03232"/>
+                                            <GradientStop Color="#28F03232" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </TextBlock.Background>
+                                </TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Margin="4" TextWrapping="Wrap" 
+                                       Text="The Document Name is Invalid and can be fixed by deleting characters" HorizontalAlignment="Left"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.Resources>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Grid.Column" Value="1"/>
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                    </Style>
+                                    <Style TargetType="{x:Type Rectangle}">
+                                        <Setter Property="Grid.Column" Value="0"/>
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Width" Value="20"/>
+                                        <Setter Property="Height" Value="20"/>
+                                        <Setter Property="Stroke" Value="Black"/>
+                                        <Setter Property="Margin" Value="0,2,0,2"/>
+                                    </Style>
+                                </Grid.Resources>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Rectangle Grid.Row="0" Fill="#00FFFFFF"/>
+                                <TextBlock Grid.Row="0" Text="The character is valid."/>
+                                <Rectangle Grid.Row="1" Fill="#9632C8E6"/>
+                                <TextBlock Grid.Row="1" TextWrapping="Wrap"
+                                       Text="The character is invalid but can be converted into a similar valid character."/>
+                                <Rectangle Grid.Row="2" Fill="#96F0C80A"/>
+                                <TextBlock Grid.Row="2" TextWrapping="Wrap"
+                                       Text="The character is invalid but can have its combining character (accent) removed to become valid."/>
+                                <Rectangle Grid.Row="3" Fill="#96DC2828"/>
+                                <TextBlock Grid.Row="3" TextWrapping="Wrap"
+                                       Text="The character is invalid and needs to be deleted."/>
+                                <Rectangle Grid.Row="4" Fill="#96B428DC"/>
+                                <TextBlock Grid.Row="4" TextWrapping="Wrap"
+                                       Text="The character is invalid and needs to be deleted."/>
+                            </Grid>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"
+                                   Text="4. Click the checkboxes that contain the effects that you want to apply to ALL the files in the displayed list."/>
+                            <Grid>
+                                <Grid.Resources>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Grid.Column" Value="1"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                    </Style>
+                                    <Style TargetType="{x:Type CheckBox}">
+                                        <Setter Property="Grid.Column" Value="0"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="Margin" Value="0,3,0,3"/>
+                                    </Style>
+                                </Grid.Resources>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox Grid.Row="0" Background="#96F0C80A" IsChecked="True"/>
+                                <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="Remove Combination Character"/>
+                                <CheckBox Grid.Row="1" Background="#9632C8E6" IsChecked="True"/>
+                                <TextBlock Grid.Row="1" TextWrapping="Wrap"
+                                       Text="Convert these characters into valid characters. If this is not checked then the below applies."/>
+                                <CheckBox Grid.Row="2" Background="#96DC2828" IsChecked="False"/>
+                                <TextBlock Grid.Row="2" Text="Delete these characters."/>
+                                <CheckBox Grid.Row="3" Background="#96B428DC" IsChecked="False"/>
+                                <TextBlock Grid.Row="3" Text="Delete these characters."/>
+                            </Grid>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"
+                                   Text="5. Click the &quot;Rename Files&quot; button at the bottom to apply the changes. The list will clear. This action can not be undone"/>
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
+            </TabItem>
+            <TabItem Header="Convertable Characters" IsSelected="True">
                 <Grid>
-                    <Grid.Resources>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Grid.Column" Value="1"/>
-                            <Setter Property="VerticalAlignment" Value="Center" />
-                        </Style>
-                        <Style TargetType="{x:Type Rectangle}">
-                            <Setter Property="Grid.Column" Value="0"/>
-                            <Setter Property="VerticalAlignment" Value="Center" />
-                            <Setter Property="Width" Value="20"/>
-                            <Setter Property="Height" Value="20"/>
-                            <Setter Property="Stroke" Value="Black"/>
-                            <Setter Property="Margin" Value="0,2,0,2"/>
-                        </Style>
-                    </Grid.Resources>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Rectangle Grid.Row="0" Fill="#00FFFFFF"/>
-                    <TextBlock Grid.Row="0" Text="The character is valid."/>
-                    <Rectangle Grid.Row="1" Fill="#9632C8E6"/>
-                    <TextBlock Grid.Row="1" TextWrapping="Wrap"
-                               Text="The character is invalid but can be converted into a similar valid character."/>
-                    <Rectangle Grid.Row="2" Fill="#96F0C80A"/>
-                    <TextBlock Grid.Row="2" TextWrapping="Wrap"
-                               Text="The character is invalid but can have its combining character (accent) removed to become valid."/>
-                    <Rectangle Grid.Row="3" Fill="#96DC2828"/>
-                    <TextBlock Grid.Row="3" TextWrapping="Wrap"
-                               Text="The character is invalid and needs to be deleted."/>
-                    <Rectangle Grid.Row="4" Fill="#96B428DC"/>
-                    <TextBlock Grid.Row="4" TextWrapping="Wrap"
-                               Text="The character is invalid and needs to be deleted."/>
+                    <ScrollViewer>
+                        <StackPanel Orientation="Vertical">
+                            <Expander Header="Basic Latin: 128 Chars">
+                                <StackPanel Orientation="Vertical" Margin="15, 2, 5, 2">
+                                    <TextBlock Text="Basic ASCII characters"/>
+                                    <TextBlock  FontFamily="Courier New" FontSize="14">
+                                        abcdefghijklmnopqrstuvwxyz<LineBreak/>
+                                        ABCDEFGHIJKLMNOPQRSTUVWXYZ<LineBreak/>
+                                        0123456789  `~!@#$%^&amp;*()-_=+<LineBreak/>
+                                        {}[]\|;:'&quot;,&lt;&gt;/?
+                                    </TextBlock>
+                                </StackPanel>
+                            </Expander>
+                            <Expander Header="Latin-1 Supplement: 128 Chars">
+                                <StackPanel Orientation="Vertical" Margin="15, 2, 5, 2">
+                                    <TextBlock Text="Symbols and Accented letters"/>
+                                    <TextBlock  FontFamily="Courier New" FontSize="14">
+                                        ¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿<LineBreak/>
+                                        ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖÙÚÛÜÝÞß<LineBreak/>
+                                        àáâãäåæçèéêëìíîïðñòóôõöùúûüýþÿ<LineBreak/>
+                                        ×Ø÷ø
+                                    </TextBlock>
+                                </StackPanel>
+                            </Expander>
+                            <Expander Header="Latin Extended-A: 128 Chars">
+                                <StackPanel Orientation="Vertical" Margin="15, 2, 5, 2">
+                                    <TextBlock Text="More latin characters with diacritics (European Latin)"/>
+                                    <TextBlock Text="Convertable" TextDecorations="Underline"/>
+                                    <TextBlock  FontFamily="Courier New" FontSize="14">
+                                        ĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİı<LineBreak/>
+                                        ĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠš<LineBreak/>
+                                        ŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽž
+                                    </TextBlock>
+                                    <TextBlock Text="Not Convertable" TextDecorations="Underline"/>
+                                    <TextBlock FontFamily="Courier New" FontSize="14">
+                                        ſ
+                                    </TextBlock>
+                                </StackPanel>
+                            </Expander>
+                            <Expander Header="Latin Extended-B: 208 Chars">
+                                <StackPanel Orientation="Vertical" Margin="15, 2, 5, 2">
+                                    <TextBlock Text="More latin characters with diacritics (Extended Latin)"/>
+                                    <TextBlock Text="Convertable" TextDecorations="Underline"/>
+                                    <TextBlock  FontFamily="Courier New" FontSize="14">
+                                        ƀƁƄƅƆƇƈƉƊƐƑƒƓƖƗƘƙƚƛƜƝƞƟƠơƢƣƤƥƫƬƭƮƯưƱƲƳƴƵƶ<LineBreak/>
+                                        ǄǅǆǇǈǉǊǋǌǍǎǏǐǑǒǓǔǕǖǗǘǙǚǛǜǝǞǟǠǡǢǣǤǥǦǧǨǩ<LineBreak/>
+                                        ǪǫǬǭǰǱǲǳǴǵǸǹǺǻǼǽǾǿȀȁȂȃȄȅȆȇȈȉȊȋȌȍȎȏȐȑȒȓ<LineBreak/>
+                                        ȔȕȖȗȘșȚțȞȟȠȡȤȥȦȧȨȩȪȫȬȭȮȯȰȱȲȳȴȵȶȷȸȹȺȻȼȽȾȿɀ<LineBreak/>
+                                        ɃɄɅɆɇɈɉɊɋɌɍɎɏ
+                                    </TextBlock>
+                                    <TextBlock Text="Not Convertable" TextDecorations="Underline"/>
+                                    <TextBlock FontFamily="Courier New" FontSize="14">
+                                        ƂƃƋƌƍƎƏƔƕƦƧƨƩƪƷƸƹƺƻƼƽƾƿǀǁǂǃǮǯǶǷȜȝȢȣɁɂ
+                                    </TextBlock>
+                                </StackPanel>
+                            </Expander>
+                            <Expander Header="IPA Extensions: 96 Chars">
+                                <StackPanel Orientation="Vertical" Margin="15, 2, 5, 2">
+                                    <TextBlock Text="Full size letters used in the International Phonetic Alphabet (IPA). Modern and historical."/>
+                                    <TextBlock Text="Convertable" TextDecorations="Underline"/>
+                                    <TextBlock  FontFamily="Courier New" FontSize="14">
+                                    </TextBlock>
+                                    <TextBlock Text="Not Convertable" TextDecorations="Underline"/>
+                                    <TextBlock FontFamily="Courier New" FontSize="14">
+                                        ɐɑɒɓɔɕɖɗɘəɚɛɜɝɞɟɠɡɢɣɤɥɦɧɨɩɪɫɬɭɮɯɰɱɲɳɴɵɶɷɸ<LineBreak/>
+                                        ɹɺɻɼɽɾɿʀʁʂʃʄʅʆʇʈʉʊʋʌʍʎʏʐʑʒʓʔʕʖʗʘʙʚʛʜʝʞʟʠ<LineBreak/>
+                                        ʡʢʣʤʥʦʧʨʩʪʫʬʭʮʯ
+                                    </TextBlock>
+                                </StackPanel>
+                            </Expander>
+                            <Expander Header="Spacing Modifier Letters: 80 Chars">
+                                <StackPanel Orientation="Vertical" Margin="15, 2, 5, 2">
+                                    <TextBlock Text="Characters for the IPA, UPA, and other phonetic transcriptions."/>
+                                    <TextBlock Text="Convertable" TextDecorations="Underline"/>
+                                    <TextBlock  FontFamily="Courier New" FontSize="14">
+                                    </TextBlock>
+                                    <TextBlock Text="Not Convertable" TextDecorations="Underline"/>
+                                    <TextBlock FontFamily="Courier New" FontSize="14">
+                                        ◌ʰ◌ʱ◌ʲ◌ʳ◌ʴ◌ʵ◌ʶ◌ʷ◌ʸ◌ʹ◌ʺ◌ʻ◌ʼ◌ʽ◌ʾ◌ʿ<LineBreak/>
+                                        ◌ˀ◌ˁ◌˂◌˃◌˄◌˅◌ˆ◌ˇ◌ˈ◌ˉ◌ˊ◌ˋ◌ˌ◌ˍ◌ˎ◌ˏ<LineBreak/>
+                                        ◌ː◌ˑ◌˒◌˓◌˔◌˕◌˖◌˗◌˘◌˙◌˚◌˛◌˜◌˝◌˞◌˟<LineBreak/>
+                                        ◌ˠ◌ˡ◌ˢ◌ˣ◌ˤ◌˥◌˦◌˧◌˨◌˩◌˪◌˫◌ˬ◌˭◌ˮ◌˯<LineBreak/>
+                                        ◌˰◌˱◌˲◌˳◌˴◌˵◌˶◌˷◌˸◌˹◌˺◌˻◌˼◌˽◌˾◌˿
+                                    </TextBlock>
+                                </StackPanel>
+                            </Expander>
+                            <Expander Header="Combining Diacritical Marks: 112 Chars">
+                                <StackPanel Orientation="Vertical" Margin="15, 2, 5, 2">
+                                    <TextBlock Text="Common combining characters."/>
+                                    <TextBlock Text="Fixed by deleting the character off the base" TextDecorations="Underline"/>
+                                    <TextBlock FontFamily="Courier New" FontSize="14">
+                                        ◌̀	◌́	◌̂	◌̃	◌̄	◌̅	◌̆	◌̇	◌̈	◌̉	◌̊	◌̋	◌̌	◌̍	◌̎	◌̏<LineBreak/>
+                                        ◌̐	◌̑	◌̒	◌̓	◌̔	◌̕	◌̖	◌̗	◌̘	◌̙	◌̚	◌̛	◌̜	◌̝	◌̞	◌̟<LineBreak/>
+                                        ◌̠	◌̡	◌̢	◌̣	◌̤	◌̥	◌̦	◌̧	◌̨	◌̩	◌̪	◌̫	◌̬	◌̭	◌̮	◌̯<LineBreak/>
+                                        ◌̰	◌̱	◌̲	◌̳	◌̴	◌̵	◌̶	◌̷	◌̸	◌̹	◌̺	◌̻	◌̼	◌̽	◌̾	◌̿<LineBreak/>
+                                        ◌̀	◌́	◌͂	◌̓	◌̈́	◌ͅ	◌͆	◌͇	◌͈	◌͉	◌͊	◌͋	◌͌	◌͍	◌͎	CGJ<LineBreak/>
+                                        ◌͐	◌͑	◌͒	◌͓	◌͔	◌͕	◌͖	◌͗	◌͘	◌͙	◌͚	◌͛	◌͜◌	◌͝◌	◌͞◌	◌͟◌<LineBreak/>
+                                        ◌͠◌	◌͡◌	◌͢◌	◌ͣ	◌ͤ	◌ͥ	◌ͦ	◌ͧ	◌ͨ	◌ͩ	◌ͪ	◌ͫ	◌ͬ	◌ͭ	◌ͮ	◌ͯ
+                                    </TextBlock>
+                                </StackPanel>
+                            </Expander>
+                            <Expander Header="Greek and Coptic: 144 Chars">
+                                <StackPanel Orientation="Vertical" Margin="15, 2, 5, 2">
+                                    <TextBlock Text="Standard Greek and Coptic characters"/>
+                                    <TextBlock Text="Convertable" TextDecorations="Underline"/>
+                                    <TextBlock  FontFamily="Courier New" FontSize="14">
+                                        ΆΈΉΊΌΎΏΐ ΪΫάέήίΰ ϊϋόύώ<LineBreak/>
+                                        ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ<LineBreak/>
+                                        αβγδεζηθικλμνξοπρςστυφχψω
+                                    </TextBlock>
+                                    <TextBlock Text="Not Convertable" TextDecorations="Underline"/>
+                                    <TextBlock FontFamily="Courier New" FontSize="14">
+                                        ͰͱͲͳʹ͵Ͷͷͺͻͼͽ;Ϳ΄΅·<LineBreak/>
+                                        ϏϐϑϒϓϔϕϖϗϘϙϚϛϜϝϞϟϠϡ<LineBreak/>
+                                        ϢϣϤϥϦϧϨϩϪϫϬϭϮϯϰ<LineBreak/>
+                                        ϱϲϳϴϵ϶ϷϸϹϺϻϼϽϾϿ<LineBreak/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </Expander>
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"
-                           Text="4. Click the checkboxes that contain the effects that you want to apply to ALL the files in the displayed list."/>
-                <Grid>
-                    <Grid.Resources>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Grid.Column" Value="1"/>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                        </Style>
-                        <Style TargetType="{x:Type CheckBox}">
-                            <Setter Property="Grid.Column" Value="0"/>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                            <Setter Property="Margin" Value="0,3,0,3"/>
-                        </Style>
-                    </Grid.Resources>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <CheckBox Grid.Row="0" Background="#96F0C80A" IsChecked="True"/>
-                    <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="Remove Combination Character"/>
-                    <CheckBox Grid.Row="1" Background="#9632C8E6" IsChecked="True"/>
-                    <TextBlock Grid.Row="1" TextWrapping="Wrap"
-                               Text="Convert these characters into valid characters. If this is not checked then the below applies."/>
-                    <CheckBox Grid.Row="2" Background="#96DC2828" IsChecked="False"/>
-                    <TextBlock Grid.Row="2" Text="Delete these characters."/>
-                    <CheckBox Grid.Row="3" Background="#96B428DC" IsChecked="False"/>
-                    <TextBlock Grid.Row="3" Text="Delete these characters."/>
-                </Grid>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"
-                           Text="5. Click the &quot;Rename Files&quot; button at the bottom to apply the changes. The list will clear. This action can not be undone"/>
-            </StackPanel>
-        </ScrollViewer>
+            </TabItem>
+            
+        </TabControl>
         <Border Grid.Row="1" BorderBrush="#FFC3C1C1" BorderThickness="1,1,1,1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,2">
                 <Button Name="okButton" Click="okButton_Click" IsDefault="True" Width="70">OK</Button>
